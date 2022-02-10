@@ -1,7 +1,5 @@
-package com.corykniefel.eddsa.domain.cert;
+package com.corykniefel.eddsa.application;
 
-import com.corykniefel.eddsa.domain.ProjectConstants;
-import com.corykniefel.eddsa.domain.key.KeyUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bouncycastle.asn1.ASN1ObjectIdentifier;
@@ -193,7 +191,7 @@ public class CertificateGenerator {
 
     }
 
-    Time getTimeForDaysInFuture(int days) {
+    public Time getTimeForDaysInFuture(int days) {
         long millsInFuture = Duration.ofDays(days).plusMillis(System.currentTimeMillis()).toMillis();
         return new Time(new Date(millsInFuture));
     }

@@ -1,6 +1,5 @@
-package com.corykniefel.eddsa.domain.cert;
+package com.corykniefel.eddsa.application;
 
-import com.corykniefel.eddsa.domain.key.KeyUtil;
 import org.bouncycastle.cert.X509CertificateHolder;
 import org.bouncycastle.cert.jcajce.JcaX509CertificateConverter;
 import org.bouncycastle.crypto.AsymmetricCipherKeyPair;
@@ -20,19 +19,17 @@ import java.util.Optional;
 
 public class CertificatePrinterUtil {
     public static void printPemToFile(X509CertificateHolder x509CertificateHolder, String fileName) {
-        Optional<String> pem = getPemString(x509CertificateHolder);
-        if (pem.isPresent()) {
+        String pem = getPemString(x509CertificateHolder);
             try (FileWriter fileWriter = new FileWriter("build/" + fileName + ".pem")) {
-                fileWriter.write(pem.get());
+                fileWriter.write(pem);
                 fileWriter.flush();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
     }
 
-    private static Optional<String> getPemString(X509CertificateHolder x509CertificateHolder) {
-        String result = null;
+    public static String getPemString(X509CertificateHolder x509CertificateHolder) {
+        String result = "";
         StringWriter stringWriter = new StringWriter();
 
         try (PemWriter pemWriter = new PemWriter(stringWriter)) {
@@ -44,7 +41,7 @@ public class CertificatePrinterUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return Optional.ofNullable(result);
+        return result;
     }
 
     public static void printToPkcs12(String fileName, X509CertificateHolder x509CertificateHolder, AsymmetricCipherKeyPair rootKeypair, String pw) {

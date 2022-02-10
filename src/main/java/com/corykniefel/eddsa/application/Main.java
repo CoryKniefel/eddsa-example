@@ -1,9 +1,5 @@
 package com.corykniefel.eddsa.application;
 
-import com.corykniefel.eddsa.domain.cert.CertificateGenerator;
-import com.corykniefel.eddsa.domain.cert.CertificatePrinterUtil;
-import com.corykniefel.eddsa.domain.key.KeyUtil;
-import com.corykniefel.eddsa.domain.validate.Validate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bouncycastle.cert.X509CertificateHolder;
@@ -20,8 +16,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class Main {
-
-    private final static Logger logger = LogManager.getLogger();
 
     static {
         Security.addProvider(new BouncyCastleProvider());
@@ -40,39 +34,29 @@ public class Main {
         String endEntityName = "EndEntity";
         String pw = "changeit";
 
-        Optional<X509CertificateHolder> rootHolderO = certGenerator.createSelfSignedRootCa(rootKeypair, rootName, daysValid);
+        X509CertificateHolder rootHolder = certGenerator.createSelfSignedRootCa(rootKeypair, rootName, daysValid)
+                .orElseThrow(() -> new RuntimeException("End-entity certificate was not created. The certificate chain will not be validated"));
 
-        if (rootHolderO.isPresent()) {
-            X509CertificateHolder rootHolder = rootHolderO.get();
-            CertificatePrinterUtil.printPemToFile(rootHolder, rootName);
-            CertificatePrinterUtil.printToPkcs12(rootName, rootHolder, rootKeypair, pw);
+        CertificatePrinterUtil.printPemToFile(rootHolder, rootName);
+        CertificatePrinterUtil.printToPkcs12(rootName, rootHolder, rootKeypair, pw);
+        System.out.println("Root certificate: \n" + CertificatePrinterUtil.getPemString(rootHolder));
 
-            Optional<X509CertificateHolder> caHolderO = certGenerator.createCaFromRoot(intermediateKeypair, intermediateName, daysValid, rootHolder, KeyUtil.convertToKeypair(rootKeypair));
+        X509CertificateHolder caHolder = certGenerator.createCaFromRoot(intermediateKeypair, intermediateName, daysValid, rootHolder, KeyUtil.convertToKeypair(rootKeypair))
+                .orElseThrow(() -> new RuntimeException("Intermediate certificate was not created. No other certificates will be created"));
 
-            if (caHolderO.isPresent()) {
-                X509CertificateHolder caHolder = caHolderO.get();
-                CertificatePrinterUtil.printPemToFile(caHolder, intermediateName);
-                CertificatePrinterUtil.printToPkcs12(intermediateName, caHolder, intermediateKeypair, pw);
-
-                Optional<X509CertificateHolder> endEntityHolderO = certGenerator.createEeFromRoot(endEntityKeypair, endEntityName, daysValid, caHolder, KeyUtil.convertToKeypair(intermediateKeypair));
-
-                if (endEntityHolderO.isPresent()) {
-                    X509CertificateHolder endEntity = endEntityHolderO.get();
-                    CertificatePrinterUtil.printPemToFile(endEntity, endEntityName);
-                    CertificatePrinterUtil.printToPkcs12(endEntityName, endEntity, intermediateKeypair, pw);
-
-                    validateCertChain(rootHolder, caHolder, endEntity);
+        CertificatePrinterUtil.printPemToFile(caHolder, intermediateName);
+        CertificatePrinterUtil.printToPkcs12(intermediateName, caHolder, intermediateKeypair, pw);
+        System.out.println("Intermediate signing certificate: \n" + CertificatePrinterUtil.getPemString(caHolder));
 
 
-                } else {
-                    logger.error("End-entity certificate was not created. The certificate chain will not be validated");
-                }
-            } else {
-                logger.error("Intermediate certificate was not created. No other certificates will be created");
-            }
-        } else {
-            logger.error("Root certificate was not created. No other certificates will be created");
-        }
+        X509CertificateHolder endEntity = certGenerator.createEeFromRoot(endEntityKeypair, endEntityName, daysValid, caHolder, KeyUtil.convertToKeypair(intermediateKeypair))
+                .orElseThrow(() -> new RuntimeException("Root certificate was not created. No other certificates will be created"));
+
+        CertificatePrinterUtil.printPemToFile(endEntity, endEntityName);
+        CertificatePrinterUtil.printToPkcs12(endEntityName, endEntity, intermediateKeypair, pw);
+        System.out.println("End entity certificate: \n" + CertificatePrinterUtil.getPemString(caHolder));
+
+        validateCertChain(rootHolder, caHolder, endEntity);
 
 
     }

@@ -1,6 +1,7 @@
 package com.corykniefel.eddsa.domain.cert;
 
-import com.corykniefel.eddsa.domain.key.KeyUtil;
+import com.corykniefel.eddsa.application.CertificateGenerator;
+import com.corykniefel.eddsa.application.KeyUtil;
 import org.bouncycastle.asn1.x509.*;
 import org.bouncycastle.cert.X509CertificateHolder;
 import org.bouncycastle.cert.jcajce.JcaX509ExtensionUtils;

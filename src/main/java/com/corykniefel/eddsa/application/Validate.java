@@ -1,4 +1,4 @@
-package com.corykniefel.eddsa.domain.validate;
+package com.corykniefel.eddsa.application;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,7 +28,7 @@ public class Validate {
 
 
         } catch (NoSuchAlgorithmException | CertificateException | InvalidAlgorithmParameterException | CertPathValidatorException e) {
-            logger.error("Error validating certificate path", e);
+            logger.error("Certificate path validation failed", e);
 
             if (e instanceof CertPathValidatorException) {
                 int pathIndexError = ((CertPathValidatorException) e).getIndex();

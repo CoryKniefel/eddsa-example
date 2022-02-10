@@ -1,6 +1,5 @@
-package com.corykniefel.eddsa.domain.key;
+package com.corykniefel.eddsa.application;
 
-import com.corykniefel.eddsa.domain.ProjectConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bouncycastle.crypto.AsymmetricCipherKeyPair;

@@ -5,7 +5,7 @@ w java.security.cert.CertPathValidatorException: Path does not chain with any of
 	at sun.security.provider.certpath.PKIXCertPathValidator.validate(PKIXCertPathValidator.java:158) ~[?:?]
 	at sun.security.provider.certpath.PKIXCertPathValidator.engineValidate(PKIXCertPathValidator.java:84) ~[?:?]
 	at java.security.cert.CertPathValidator.validate(CertPathValidator.java:309) ~[?:?]
-	at com.corykniefel.eddsa.domain.validate.Validate.validatePath(Validate.java:41) [main/:?]
+	at com.corykniefel.eddsa.application.Validate.validatePath(Validate.java:41) [main/:?]
 	at com.corykniefel.eddsa.application.Main.validateCertChain(Main.java:75) [main/:?]
 	at com.corykniefel.eddsa.application.Main.main(Main.java:53) [main/:?]
 2021-09-04 11:11:57 ERROR Error validating certificate path
@@ -15,7 +15,7 @@ w java.security.cert.CertPathValidatorException: Could not determine revocation 
 	at sun.security.provider.certpath.PKIXCertPathValidator.validate(PKIXCertPathValidator.java:145) ~[?:?]
 	at sun.security.provider.certpath.PKIXCertPathValidator.engineValidate(PKIXCertPathValidator.java:84) ~[?:?]
 	at java.security.cert.CertPathValidator.validate(CertPathValidator.java:309) ~[?:?]
-	at com.corykniefel.eddsa.domain.validate.Validate.validatePath(Validate.java:41) [main/:?]
+	at com.corykniefel.eddsa.application.Validate.validatePath(Validate.java:41) [main/:?]
 	at com.corykniefel.eddsa.application.Main.validateCertChain(Main.java:75) [main/:?]
 	at com.corykniefel.eddsa.application.Main.main(Main.java:53) [main/:?]
 Caused by: java.security.cert.CertPathValidatorException: Could not determine revocation status
@@ -34,7 +34,7 @@ w java.security.cert.CertPathValidatorException: Could not determine revocation 
 	at sun.security.provider.certpath.PKIXCertPathValidator.validate(PKIXCertPathValidator.java:145) ~[?:?]
 	at sun.security.provider.certpath.PKIXCertPathValidator.engineValidate(PKIXCertPathValidator.java:84) ~[?:?]
 	at java.security.cert.CertPathValidator.validate(CertPathValidator.java:309) ~[?:?]
-	at com.corykniefel.eddsa.domain.validate.Validate.validatePath(Validate.java:41) [main/:?]
+	at com.corykniefel.eddsa.application.Validate.validatePath(Validate.java:41) [main/:?]
 	at com.corykniefel.eddsa.application.Main.validateCertChain(Main.java:75) [main/:?]
 	at com.corykniefel.eddsa.application.Main.main(Main.java:53) [main/:?]
 Caused by: java.security.cert.CertPathValidatorException: Could not determine revocation status
@@ -53,7 +53,7 @@ w java.security.cert.CertPathValidatorException: Could not determine revocation 
 	at sun.security.provider.certpath.PKIXCertPathValidator.validate(PKIXCertPathValidator.java:145) ~[?:?]
 	at sun.security.provider.certpath.PKIXCertPathValidator.engineValidate(PKIXCertPathValidator.java:84) ~[?:?]
 	at java.security.cert.CertPathValidator.validate(CertPathValidator.java:309) ~[?:?]
-	at com.corykniefel.eddsa.domain.validate.Validate.validatePath(Validate.java:41) [main/:?]
+	at com.corykniefel.eddsa.application.Validate.validatePath(Validate.java:41) [main/:?]
 	at com.corykniefel.eddsa.application.Main.validateCertChain(Main.java:75) [main/:?]
 	at com.corykniefel.eddsa.application.Main.main(Main.java:53) [main/:?]
 Caused by: java.security.cert.CertPathValidatorException: Could not determine revocation status
@@ -71,7 +71,7 @@ w java.security.cert.CertPathValidatorException: Path does not chain with any of
 	at sun.security.provider.certpath.PKIXCertPathValidator.validate(PKIXCertPathValidator.java:158) ~[?:?]
 	at sun.security.provider.certpath.PKIXCertPathValidator.engineValidate(PKIXCertPathValidator.java:84) ~[?:?]
 	at java.security.cert.CertPathValidator.validate(CertPathValidator.java:309) ~[?:?]
-	at com.corykniefel.eddsa.domain.validate.Validate.validatePath(Validate.java:42) [main/:?]
+	at com.corykniefel.eddsa.application.Validate.validatePath(Validate.java:42) [main/:?]
 	at com.corykniefel.eddsa.application.Main.validateCertChain(Main.java:75) [main/:?]
 	at com.corykniefel.eddsa.application.Main.main(Main.java:53) [main/:?]
 2021-09-04 11:41:04 ERROR The index is: -1
@@ -83,7 +83,7 @@ w java.security.cert.CertPathValidatorException: Path does not chain with any of
 	at sun.security.provider.certpath.PKIXCertPathValidator.validate(PKIXCertPathValidator.java:158) ~[?:?]
 	at sun.security.provider.certpath.PKIXCertPathValidator.engineValidate(PKIXCertPathValidator.java:84) ~[?:?]
 	at java.security.cert.CertPathValidator.validate(CertPathValidator.java:309) ~[?:?]
-	at com.corykniefel.eddsa.domain.validate.Validate.validatePath(Validate.java:42) [main/:?]
+	at com.corykniefel.eddsa.application.Validate.validatePath(Validate.java:42) [main/:?]
 	at com.corykniefel.eddsa.application.Main.validateCertChain(Main.java:75) [main/:?]
 	at com.corykniefel.eddsa.application.Main.main(Main.java:53) [main/:?]
 2021-09-04 11:55:58 ERROR The index is: -1
@@ -151,6 +151,105 @@ PKIXCertPathValidatorResult: [
   Policy Tree: null
   Subject Public Key: Ed25519 Public Key [d0:00:ae:1e:18:11:c0:04:45:3b:fc:ea:ed:82:29:b5:6d:bf:31:58]
     public data: cb32bc357f4835a19e274b9f777b9efa99cf1a1866fe95f4b91afc528b26ea4c
+
+]
+w2022-02-09 20:40:33 INFO  Certificate path is valid 
+PKIXCertPathValidatorResult: [
+  Trust Anchor: [
+  Trusted CA cert:   [0]         Version: 3
+         SerialNumber: 1
+             IssuerDN: CN=Root
+           Start Date: Wed Feb 09 20:40:33 PST 2022
+           Final Date: Sat Feb 19 20:40:33 PST 2022
+            SubjectDN: CN=Root
+           Public Key: Ed25519 Public Key [90:a7:c1:43:fa:a3:f6:4a:2f:92:e9:72:77:3d:2f:93:fc:ac:85:25]
+    public data: 5b660a3443dae69d215704230430d76b9299706d25ba4d6bb9e1a2246e0a0bdb
+
+  Signature Algorithm: Ed25519
+            Signature: 8bcca9addeda558b96cbbdd014c69fdf0b45c2ba
+                       9f3f5c4402d007949a702dd42e22788936bde508
+                       26802586e1312b8fddc271ffa0f237f2095f33e7
+                       8dc8ed00
+       Extensions: 
+                       critical(false) 2.5.29.14 value = DER Octet String[20] 
+
+                       critical(false) 2.5.29.35 value = Sequence
+    Tagged [0] IMPLICIT 
+        DER Octet String[20] 
+
+                       critical(true) BasicConstraints: isCa(true), pathLenConstraint = 1
+                       critical(true) KeyUsage: 0x4
+
+
+  Policy Tree: null
+  Subject Public Key: Ed25519 Public Key [0c:c6:e4:2e:fa:bc:f4:96:2b:d0:59:7d:33:ba:f4:43:cb:79:af:37]
+    public data: 8fb012363e8fe61997a9892a872bad8426d0c4b977f0c2268ceb38d201ee6ba1
+
+]
+w2022-02-09 20:52:50 INFO  Certificate path is valid 
+PKIXCertPathValidatorResult: [
+  Trust Anchor: [
+  Trusted CA cert:   [0]         Version: 3
+         SerialNumber: 1
+             IssuerDN: CN=Root
+           Start Date: Wed Feb 09 20:52:49 PST 2022
+           Final Date: Sat Feb 19 20:52:49 PST 2022
+            SubjectDN: CN=Root
+           Public Key: Ed25519 Public Key [18:b2:e7:a6:10:e3:7e:b7:12:a2:62:65:16:3b:f9:50:cf:e8:da:75]
+    public data: bb9dc9b1ffbc0a8325f45fd947bea70082fe045efa7628832531f469a57f37e3
+
+  Signature Algorithm: Ed25519
+            Signature: 45779cc7c177bc4d8de48e530c1691c8a5c652da
+                       f995f6b6d25a4fe95aa05e0756520a34c924d626
+                       0a1d3d0215d3aee0ed94b44ab2dcebd1443f3c60
+                       ab20820b
+       Extensions: 
+                       critical(false) 2.5.29.14 value = DER Octet String[20] 
+
+                       critical(false) 2.5.29.35 value = Sequence
+    Tagged [0] IMPLICIT 
+        DER Octet String[20] 
+
+                       critical(true) BasicConstraints: isCa(true), pathLenConstraint = 1
+                       critical(true) KeyUsage: 0x4
+
+
+  Policy Tree: null
+  Subject Public Key: Ed25519 Public Key [e9:75:3f:87:6d:25:92:91:1e:20:e3:c6:88:29:3a:c6:e3:36:bf:d9]
+    public data: 22470c8545e2a8d1822e6bde13bebeeb98ad4dbaf41f61af4b413403be12f12b
+
+]
+w2022-02-09 20:56:11 INFO  Certificate path is valid 
+PKIXCertPathValidatorResult: [
+  Trust Anchor: [
+  Trusted CA cert:   [0]         Version: 3
+         SerialNumber: 1
+             IssuerDN: CN=Root
+           Start Date: Wed Feb 09 20:56:10 PST 2022
+           Final Date: Sat Feb 19 20:56:10 PST 2022
+            SubjectDN: CN=Root
+           Public Key: Ed25519 Public Key [cf:d4:0d:9c:0d:09:39:00:6c:fd:13:a4:2e:54:ce:20:bf:10:99:4f]
+    public data: aa018c032378fe4f09a24ad7516755f5b9c8cb3171855479ce81f6ac5cf01b2a
+
+  Signature Algorithm: Ed25519
+            Signature: 06a62fbcb3c159041d3650f125e90bd3e8822016
+                       b2459e18b460d667aef0412397367f9f3764312a
+                       2e12bffddef1612e789353dd32b75d5d5ecb193f
+                       4bae8b04
+       Extensions: 
+                       critical(false) 2.5.29.14 value = DER Octet String[20] 
+
+                       critical(false) 2.5.29.35 value = Sequence
+    Tagged [0] IMPLICIT 
+        DER Octet String[20] 
+
+                       critical(true) BasicConstraints: isCa(true), pathLenConstraint = 1
+                       critical(true) KeyUsage: 0x4
+
+
+  Policy Tree: null
+  Subject Public Key: Ed25519 Public Key [13:02:cb:5a:80:6a:00:a7:38:b4:c3:1b:95:7e:96:e5:cb:2a:7f:f6]
+    public data: a0c0c23c3d187157e88c4e063e4b64f5f0648efc4f33aee52876d271b4197382
 
 ]
 w
